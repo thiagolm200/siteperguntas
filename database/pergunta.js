@@ -5,7 +5,14 @@ const Pergunta = connection.define([
     'titulo',
 {
     titulo:{
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    descricao:{
+        type: Sequelize.TEXT,
+        allowNull: false
     }
     
 });
+
+Pergunta.sync({force: false}).then(() => {});
