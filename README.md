@@ -1,3 +1,3 @@
 # siteperguntas
-Requisitos: nodejs
+Requisitos: nodejs, MySQL               
 Comandos: nodemon index.js
