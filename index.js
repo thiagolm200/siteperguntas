@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const connection = require('./database/database');
 const pergunta = require('./database/pergunta');
 const Pergunta = require('./database/pergunta');
+const Resposta = require('./database/Resposta');
 
 connection.authenticate().then(() => {
     console.log("Conexão efetuada com o banco de dados");
@@ -36,15 +37,31 @@ app.get("/perguntas",(req,res)=>{
 app.post("/salvarpergunta",(req,res) =>{
     var titulo = req.body.titulo;
     var desc = req.body.desc;
-    res.send("Formulário Salvo"+ titulo);
+    
     Pergunta.create({
         titulo: titulo,
         descricao: desc
-    }).then(()=>{
+    }).then( () => {
         res.redirect("/");
     });
     
 });
+
+app.get("/pergunta/:id",(req,res) => {
+    var id = req.params.id;
+    Pergunta.findOne({
+        where: {id:id}
+    }).then(pergunta => {
+        if(pergunta != undefined){ //pergunta encontrada
+            res.render("pergunta", {
+                pergunta: pergunta
+            });
+        }else{
+            res.redirect("/");
+            alert("Pergunta não encontrada!");
+        }
+    })
+})
 
 app.listen(8000,()=>{
     console.log("conectado com sucesso.");
