@@ -10,7 +10,6 @@ const Resposta = connection.define("resposta",{
         type: Sequelize.INTEGER,
         allowNull: false
     }
-
 });
 
 Resposta.sync({force: false});

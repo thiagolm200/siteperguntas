@@ -1,9 +1,7 @@
 const Sequelize = require('sequelize');
 const connection = require('./database');
 
-const Pergunta = connection.define(
-    'perguntas',
-{
+const Pergunta = connection.define('perguntas',{
     titulo:{
         type: Sequelize.STRING,
         allowNull: false
@@ -12,7 +10,6 @@ const Pergunta = connection.define(
         type: Sequelize.TEXT,
         allowNull: false
     }
-    
 })
 
 Pergunta.sync({force: false}).then(() => {});
